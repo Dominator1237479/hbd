@@ -12,16 +12,16 @@ You'll need [Node.js](https://nodejs.org/) installed on your computer. npm comes
 
 Clone the repository or download the project, then open a terminal inside the project folder (the one containing `package.json`).
 
-Install the dependencies:
+On Windows PowerShell, install the dependencies with:
 
-```bash
-npm install
+```powershell
+npm.cmd install
 ```
 
 Start the development server:
 
-```bash
-npm run dev
+```powershell
+npm.cmd run dev
 ```
 
 Vite will print a local URL in the terminal. Open that address in your browser. By default, it's:
@@ -30,14 +30,9 @@ Vite will print a local URL in the terminal. Open that address in your browser. 
 http://localhost:5173/
 ```
 
-On Windows, if PowerShell blocks the `npm` command, use `npm.cmd` instead:
-
-```powershell
-npm.cmd install
-npm.cmd run dev
-```
-
 Keep the terminal open while working on the site. To stop the development server, press `Ctrl + C`.
+
+On macOS/Linux terminals, use `npm install` and `npm run dev` instead.
 
 The project also loads its fonts through Google Fonts. An internet connection is needed for those fonts; otherwise, the browser will use its default serif fallbacks.
 
