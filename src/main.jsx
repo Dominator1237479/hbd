@@ -19,6 +19,18 @@ function Photo({ src, alt, className = '', number = '01', onPhotoClick }) {
 function Flower() { return <div className="flower" aria-hidden="true"><span>{symbol(0x273f)}</span><i>{symbol(0x273f)}</i><b>{symbol(0x273f)}</b></div>; }
 function Camera() { return <div className="camera" aria-hidden="true"><div className="camera-top"/><div className="camera-lens"/><div className="camera-flash"/><span>{symbol(0x2726)}</span></div>; }
 
+function BirthdayEffects({ opened }) {
+  const confetti = Array.from({ length: 36 }, (_, index) => index);
+  const petals = Array.from({ length: 30 }, (_, index) => index);
+  return <div className={`birthday-effects${opened ? ' birthday-effects-opened' : ''}`} aria-hidden="true">
+    <div className="balloon balloon-one"><span /></div><div className="balloon balloon-two"><span /></div>
+    <div className="balloon balloon-three"><span /></div><div className="balloon balloon-four"><span /></div>
+    <div className="confetti-layer">{confetti.map((piece) => <i key={piece} style={{ '--i': piece, '--x': `${(piece * 47 + 13) % 100}%`, '--delay': `${(piece % 12) * -0.7}s`, '--drift': `${((piece * 29) % 90) - 45}px` }} />)}</div>
+    <div className="petal-shower">{petals.map((petal) => <i key={petal} style={{ '--i': petal, '--x': `${(petal * 37 + 7) % 100}%`, '--delay': `${(petal % 15) * -0.32}s`, '--drift': `${((petal * 31) % 130) - 65}px`, '--turn': `${(petal * 67) % 360}deg` }} />)}</div>
+    <span className="effect-sparkle sparkle-one">✦</span><span className="effect-sparkle sparkle-two">✧</span><span className="effect-sparkle sparkle-three">✦</span>
+  </div>;
+}
+
 function Opening({ onOpen, opened }) {
   return <section className="opening" aria-label="Birthday card cover">
     <span className="cover-kicker">A LITTLE SURPRISE FOR</span>
@@ -131,7 +143,7 @@ function App() {
   const playMusic = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.volume = 0.25;
+    audio.volume = 1;
     const result = audio.play();
     if (result?.catch) result.catch(() => { setPlaying(false); setAudioUnavailable(true); });
   };
@@ -144,13 +156,14 @@ function App() {
   const toggleMusic = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (audio.paused) { setAudioUnavailable(false); audio.volume = 0.25; const result = audio.play(); if (result?.catch) result.catch(() => { setPlaying(false); setAudioUnavailable(true); }); }
+    if (audio.paused) { setAudioUnavailable(false); audio.volume = 1; const result = audio.play(); if (result?.catch) result.catch(() => { setPlaying(false); setAudioUnavailable(true); }); }
     else audio.pause();
   };
   const showPhoto = (src, alt) => setLightbox({ src, alt });
 
   return <main>
-    <audio ref={audioRef} src="/assets/music/birthday-song.mp3" preload="none" loop onPlay={() => { setPlaying(true); setAudioUnavailable(false); }} onPause={() => setPlaying(false)} onError={() => { setPlaying(false); setAudioUnavailable(true); }} />
+    <BirthdayEffects opened={wished} />
+    <audio ref={audioRef} src="/assets/music/music.mp3" preload="none" loop onPlay={() => { setPlaying(true); setAudioUnavailable(false); }} onPause={() => setPlaying(false)} onError={() => { setPlaying(false); setAudioUnavailable(true); }} />
     <Opening onOpen={reveal} opened={opened}/>
     <MusicControl playing={playing} unavailable={audioUnavailable} onToggle={toggleMusic}/>
     <div className={`experience ${opened ? 'experience-opened' : ''}`}><div className="book-intro"><span className="eyebrow">A BOOK OF LITTLE THINGS</span>

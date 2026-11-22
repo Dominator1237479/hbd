@@ -43,12 +43,12 @@ The birthday song is loaded from a local MP3 file.
 Place your audio file here:
 
 ```text
-public/assets/music/birthday-song.mp3
+public/assets/music/music.mp3
 ```
 
 That's all you need to do. Keep the filename the same, or update the audio path in the relevant source code if you prefer a different name.
 
-The music doesn't start automatically when the page loads. It is triggered by clicking **Open Me**, alongside the envelope-opening animation. The starting volume is set to 25%.
+The music doesn't start automatically when the page loads. It is triggered by clicking **Open Me**, alongside the envelope-opening animation. The app leaves playback at full volume (100%); the device volume controls how loud it sounds.
 
 There's also a small music control in the corner of the page for pausing and resuming playback.
 
@@ -182,7 +182,7 @@ Birthday/
 │       ├── decorations/
 │       ├── icons/
 │       ├── music/
-│       │   └── birthday-song.mp3
+│       │   └── music.mp3
 │       ├── photos/
 │       └── textures/
 │

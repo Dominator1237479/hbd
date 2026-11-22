@@ -18,3 +18,34 @@
 @keyframes greeting-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes paper-reveal{from{opacity:0;transform:translateY(8px) rotate(-1deg)}to{opacity:1;transform:translateY(0) rotate(0)}}@keyframes backdrop-in{from{opacity:0}to{opacity:1}}@keyframes photo-in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}@keyframes note-sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}@keyframes star-glimmer{from{opacity:.65;transform:scale(.98)}to{opacity:1;transform:scale(1.02)}}
 @media(max-width:700px){.music-control{right:12px;bottom:12px;min-height:39px;padding:0 12px;gap:7px}.music-label{font-size:9px}.birthday-greeting h2{font-size:28px}.personal-note-area{margin-top:20px}.letter-paper{padding-bottom:72px}.wish-section{padding-bottom:30px}.lightbox-backdrop{padding:16px}.lightbox-dialog{max-width:96vw;max-height:88vh}.lightbox-dialog img{max-width:calc(96vw - 26px);max-height:calc(88vh - 26px)}}
 @media(prefers-reduced-motion:reduce){.music-playing .music-note,.wish-stars{animation:none!important}.experience,.music-control,.photo-clickable{transition:none!important}}
+
+/* A soft, page-wide birthday atmosphere; decorations never intercept clicks. */
+.birthday-effects{position:fixed;inset:0;z-index:12;overflow:hidden;pointer-events:none;contain:strict}
+.balloon{position:absolute;width:clamp(32px,4vw,54px);height:clamp(42px,5vw,66px);border-radius:50% 50% 46% 46%;opacity:.62;filter:drop-shadow(0 5px 7px #23040b35);animation:balloon-drift 7s ease-in-out infinite alternate}
+.balloon:before{content:'';position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid currentColor}
+.balloon:after{content:'';position:absolute;left:50%;top:calc(100% + 3px);height:clamp(54px,10vh,110px);border-left:1px solid #ead1ad99;transform:rotate(3deg);transform-origin:top}
+.balloon span{position:absolute;top:17%;left:20%;width:15%;height:31%;border-radius:50%;background:#fff9e9aa;filter:blur(1px)}
+.balloon-one{color:#dfb879;background:radial-gradient(ellipse at 32% 28%,#f5dba8,#b77a4d);left:4%;top:20%;animation-delay:-2s}
+.balloon-two{color:#c77e7c;background:radial-gradient(ellipse at 32% 28%,#f2b8a9,#914052);right:5%;top:36%;animation-delay:-4.5s}
+.balloon-three{color:#d5c79a;background:radial-gradient(ellipse at 32% 28%,#f7edc8,#9e8b58);left:8%;bottom:15%;animation-delay:-1s;transform:scale(.78)}
+.balloon-four{color:#c698a1;background:radial-gradient(ellipse at 32% 28%,#f0c2c9,#965167);right:9%;bottom:19%;animation-delay:-5s;transform:scale(.82)}
+.confetti-layer{position:absolute;inset:0;overflow:hidden;opacity:.72}
+.confetti-layer i{position:absolute;top:-12px;left:var(--x);width:6px;height:11px;border-radius:2px;background:hsl(calc(var(--i)*17 + 22),48%,70%);opacity:.72;transform:rotate(calc(var(--i)*37deg));animation:confetti-fall calc(8s + (var(--i) % 7)*1s) linear var(--delay) infinite}
+.confetti-layer i:nth-child(3n){width:5px;height:5px;border-radius:50%}.confetti-layer i:nth-child(4n){width:3px;height:13px}
+.effect-sparkle{position:absolute;color:#f3d6a9;text-shadow:0 0 12px #f3d6a966;animation:sparkle-pulse 2.8s ease-in-out infinite alternate}
+.sparkle-one{left:16%;top:44%;font-size:18px}.sparkle-two{right:17%;top:16%;font-size:25px;animation-delay:-1.1s}.sparkle-three{right:14%;bottom:12%;font-size:15px;animation-delay:-2s}
+.birthday-effects-opened .confetti-layer{animation:confetti-burst .9s ease-out both}
+@keyframes balloon-drift{from{translate:0 8px;rotate:-5deg}to{translate:8px -18px;rotate:5deg}}
+@keyframes confetti-fall{0%{translate:0 -3vh;rotate:0deg}100%{translate:var(--drift) 112vh;rotate:660deg}}
+@keyframes sparkle-pulse{from{opacity:.35;scale:.75}to{opacity:1;scale:1.2}}
+@keyframes confetti-burst{0%{opacity:1;scale:.8}35%{opacity:1;scale:1.08}100%{opacity:.72;scale:1}}
+@media(max-width:700px){.balloon-one{left:1%;top:25%}.balloon-two{right:1%;top:43%}.balloon-three{left:1%;bottom:11%}.balloon-four{right:1%;bottom:15%}.confetti-layer i{width:4px;height:8px}.sparkle-one{left:8%}.sparkle-two{right:9%}}
+@media(prefers-reduced-motion:reduce){.birthday-effects *{animation:none!important}.confetti-layer{display:none}}
+.petal-shower{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden}
+.birthday-effects-opened .petal-shower{opacity:1;visibility:visible}
+.petal-shower i{position:absolute;top:-24px;left:var(--x);width:12px;height:18px;border-radius:80% 15% 70% 20%;background:linear-gradient(145deg,#ffe2d4,#dc8b9e 75%);box-shadow:0 1px 3px #4a102044;opacity:0;transform:rotate(var(--turn));animation:none}
+.petal-shower i:nth-child(3n){width:9px;height:14px;background:linear-gradient(145deg,#fff0d7,#d7a5b3 75%)}
+.petal-shower i:nth-child(4n){width:15px;height:11px;border-radius:70% 20% 70% 25%;background:linear-gradient(145deg,#f8d5d1,#c67488 80%)}
+.birthday-effects-opened .petal-shower i{animation:petal-rain 5.8s cubic-bezier(.2,.65,.45,1) calc(var(--i)*.055s) both}
+@keyframes petal-rain{0%{opacity:0;translate:0 -2vh;rotate:0deg}8%{opacity:.92}75%{opacity:.86}100%{opacity:0;translate:var(--drift) 112vh;rotate:calc(var(--turn) + 440deg)}}
+@media(prefers-reduced-motion:reduce){.birthday-effects-opened .petal-shower i{animation:none!important}.petal-shower{display:none}}
