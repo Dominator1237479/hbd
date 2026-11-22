@@ -1,23 +1,20 @@
-# A Birthday Scrapbook
+# A Birthday Scrapbook ♡
 
-A little website made for a special person.
+A small birthday surprise made for **Pratyusha Ghosh**.
 
-This project is a personal birthday surprise for **Pratyusha Ghosh**. Built around a scrapbook-inspired design, it brings together photographs, handwritten messages and a few memories in one place.
+This project is a personal website built around the feeling of opening a handmade scrapbook. It brings together photographs, little memories, and a birthday letter in one place.
 
-Nothing too complicated. Just something personal.
+Nothing fancy. Just a collection of moments made into something special.
 
-## About
+## ✦ Features
 
-The website is designed to feel like opening a small handmade memory book.
-
-It includes:
-- An envelope-style opening screen.
-- A scrapbook-inspired birthday layout.
-- Personal photographs and captions.
-- Polaroid-style memory sections.
-- A film strip containing photographs.
-- A personal birthday letter.
-- Background music.
+- Envelope-style opening screen
+- Scrapbook-inspired birthday book
+- Polaroid-style photo memories
+- Film strip photo gallery
+- Personal birthday letter
+- Customizable text and photographs
+- Responsive layout
 
 ## Built With
 
@@ -29,56 +26,84 @@ It includes:
 ## Project Structure
 
 ```text
-Friends,Gf/
+BirthdayRaw-main/
+│
 ├── public/
 │   └── assets/
-│       ├── photos/
 │       ├── decorations/
 │       ├── icons/
-│       ├── textures/
-│       └── music/
+│       ├── photos/
+│       └── textures/
 │
 ├── src/
 │   ├── data/
 │   │   └── birthdayContent.js
+│   │
 │   ├── main.jsx
 │   └── styles.css
 │
 ├── index.html
-└── package.json
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
-## Personalization
+## Personalizing the Website
 
-The website content can be edited through:
+Most of the personal content is managed from one file:
 
 `src/data/birthdayContent.js`
 
-Photographs go inside:
+You can edit:
+
+- Recipient's name
+- Birthday heading
+- Cover message
+- Introduction
+- Opening photograph and caption
+- Three memory sections
+- Five film strip photographs
+- Birthday letter
+- Sign-off and signature
+
+### Adding Photos
+
+Place your photographs inside:
 
 `public/assets/photos/`
 
-Background music goes inside:
+Then add their filenames to `birthdayContent.js`.
 
-`public/assets/music/`
+For example:
 
-Replace the sample content with your own photographs, captions and messages.
+```js
+openingPhoto: "cover.jpg",
+
+memories: [
+  {
+    image: "memory-01.jpg",
+    label: "01 · A day to keep",
+    caption: "Your caption",
+    note: "Your memory"
+  }
+],
+
+filmPhotos: [
+  "film-01.jpg",
+  "film-02.jpg",
+  "film-03.jpg",
+  "film-04.jpg",
+  "film-05.jpg"
+],
+```
+
+Leave an image path empty if you want to keep the default photo placeholder.
 
 ## Run Locally
 
-Clone the repository:
+Make sure Node.js is installed.
 
-```bash
-git clone YOUR_REPOSITORY_URL
-```
-
-Move into the project directory:
-
-```bash
-cd "Friends,Gf"
-```
-
-Install dependencies:
+Install the dependencies:
 
 ```bash
 npm install
@@ -90,14 +115,24 @@ Start the development server:
 npm run dev
 ```
 
-Open the local URL shown in your terminal.
+Open the local URL displayed in your terminal.
 
-## A Small Note
+## Build for Production
 
-This website isn't meant to be a general-purpose birthday template. It's a personal project, made to keep a few photographs and words together in a way that feels a little more special.
+```bash
+npm run build
+```
 
-Some things are better kept simple.
+The production files will be generated inside the `dist` folder.
+
+## Deployment
+
+You can deploy this project using Vercel.
+
+Connect your GitHub repository, select Vite as the framework, and deploy.
 
 ---
+
+*A little website for a person worth celebrating.*
 
 Made with care. ♡
