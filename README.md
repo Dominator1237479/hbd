@@ -1,37 +1,193 @@
-# A Birthday Scrapbook ♡
+# Birthday Scrapbook
 
-A small birthday surprise made for **Pratyusha Ghosh**.
+A little birthday scrapbook made with React and Vite, put together with photos, memories, music and a few interactive details.
 
-This project is a personal website built around the feeling of opening a handmade scrapbook. It brings together photographs, little memories, and a birthday letter in one place.
+The idea is simple: open an envelope, turn through a collection of scrapbook-style pages, revisit some memories and find a few personal notes along the way.
 
-Nothing fancy. Just a collection of moments made into something special.
+The design uses a burgundy background, paper-style pages, Polaroid frames, a film strip and a handwritten-style letter. The words, photos and music are all kept separate from the main components, so they're easy to change without having to dig through the UI code.
 
-## ✦ Features
+## Getting started
 
-- Envelope-style opening screen
-- Scrapbook-inspired birthday book
-- Polaroid-style photo memories
-- Film strip photo gallery
-- Personal birthday letter
-- Customizable text and photographs
-- Responsive layout
+You'll need [Node.js](https://nodejs.org/) installed on your computer. npm comes with it.
 
-## Built With
+Clone the repository or download the project, then open a terminal inside the project folder (the one containing `package.json`).
 
-- React
-- JavaScript
-- CSS
-- Vite
+Install the dependencies:
 
-## Project Structure
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Vite will print a local URL in the terminal. Open that address in your browser. By default, it's:
 
 ```text
-BirthdayRaw-main/
+http://localhost:5173/
+```
+
+On Windows, if PowerShell blocks the `npm` command, use `npm.cmd` instead:
+
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
+
+Keep the terminal open while working on the site. To stop the development server, press `Ctrl + C`.
+
+The project also loads its fonts through Google Fonts. An internet connection is needed for those fonts; otherwise, the browser will use its default serif fallbacks.
+
+## Adding the music
+
+The birthday song is loaded from a local MP3 file.
+
+Place your audio file here:
+
+```text
+public/assets/music/birthday-song.mp3
+```
+
+That's all you need to do. Keep the filename the same, or update the audio path in the relevant source code if you prefer a different name.
+
+The music doesn't start automatically when the page loads. It is triggered by clicking **Open Me**, alongside the envelope-opening animation. The starting volume is set to 25%.
+
+There's also a small music control in the corner of the page for pausing and resuming playback.
+
+If the audio file is missing or the browser cannot play it, the scrapbook will still open and work normally. Only the music will be unavailable.
+
+## Adding photographs
+
+All photographs belong in:
+
+```text
+public/assets/photos/
+```
+
+For example, you could organise them like this:
+
+```text
+public/assets/photos/
+├── cover-photo.jpg
+├── memory-01.jpg
+├── memory-02.jpg
+├── memory-03.jpg
+├── film-01.jpg
+├── film-02.jpg
+├── film-03.jpg
+├── film-04.jpg
+└── film-05.jpg
+```
+
+Once the images are in place, open:
+
+```text
+src/data/birthdayContent.js
+```
+
+This file contains the image paths used throughout the scrapbook.
+
+Here's an example:
+
+```js
+openingPhoto: "cover-photo.jpg",
+
+memories: [
+  {
+    image: "memory-01.jpg",
+    label: "01 - A day to keep",
+    caption: "[ADD MEMORY CAPTION]",
+    note: "[ADD YOUR PARAGRAPH HERE]"
+  },
+  {
+    image: "memory-02.jpg",
+    label: "02 - Little moments",
+    caption: "[ADD MEMORY CAPTION]",
+    note: "[ADD YOUR PARAGRAPH HERE]"
+  },
+  {
+    image: "memory-03.jpg",
+    label: "03 - Just us",
+    caption: "[ADD MEMORY CAPTION]",
+    note: "[ADD YOUR PARAGRAPH HERE]"
+  },
+],
+
+filmPhotos: [
+  "film-01.jpg",
+  "film-02.jpg",
+  "film-03.jpg",
+  "film-04.jpg",
+  "film-05.jpg",
+],
+```
+
+A filename is enough; the application looks for it inside `public/assets/photos/`.
+
+You can leave an image field empty (`""`) if you don't want to use a photograph in that particular frame.
+
+Images are fitted into the existing scrapbook layouts, so some cropping is expected depending on their dimensions. Keep the original photos if you want to use them elsewhere.
+
+Loaded photographs can be clicked to view them in a larger lightbox. Press `Escape`, click outside the image or use the close button to exit.
+
+## Changing the content
+
+All the personal content is managed from one place:
+
+```text
+src/data/birthdayContent.js
+```
+
+You don't need to edit the main React components just to change a caption, message or photograph.
+
+Here's what each field controls:
+
+| Field | Used for |
+| --- | --- |
+| `recipient` | Recipient's name throughout the scrapbook. |
+| `birthdayGreeting` | Birthday greeting shown after opening. |
+| `birthdayNumber` | Large heading on the left-hand page. |
+| `coverNote` | Small handwritten line on the envelope. |
+| `openingPrompt` | Text displayed on the envelope button. |
+| `openingPhoto` | Photograph on the opening page. |
+| `openingCaption` | Caption below the opening photograph. |
+| `introduction` | Introductory paragraph on the first page. |
+| `memories` | Three memory entries with photos, captions and notes. |
+| `filmPhotos` | Five photographs in the horizontal film strip. |
+| `letter` | Main birthday letter. |
+| `signOff` | Closing line of the letter. |
+| `signature` | Signature below the letter. |
+| `hiddenNote` | Message revealed through the little note interaction. |
+| `birthdayWish` | Message revealed through the birthday wish interaction. |
+
+The recipient is currently set up for **Pratyusha Ghosh**. Change it in the data file if needed.
+
+For longer messages, JavaScript strings support `\n` for line breaks:
+
+```js
+letter: "First paragraph.\n\nSecond paragraph.",
+```
+
+One small thing worth remembering: don't remove the quotation marks, commas or brackets when editing the file. They're part of the JavaScript syntax.
+
+The scrapbook provides the layout and interactions; the actual personal messages and memories need to be added manually.
+
+## Project structure
+
+The main files are organised as follows:
+
+```text
+Birthday/
 │
 ├── public/
 │   └── assets/
 │       ├── decorations/
 │       ├── icons/
+│       ├── music/
+│       │   └── birthday-song.mp3
 │       ├── photos/
 │       └── textures/
 │
@@ -48,91 +204,62 @@ BirthdayRaw-main/
 └── README.md
 ```
 
-## Personalizing the Website
+A quick note on the folders:
 
-Most of the personal content is managed from one file:
+- `src/main.jsx` contains the React components and interactions.
+- `src/styles.css` handles the scrapbook layout, styling, animations and responsive behaviour.
+- `src/data/birthdayContent.js` holds the personal content and image references.
+- `public/assets/` is where the photographs, music and optional assets live.
+- `index.html` contains the page metadata and font loading.
 
-`src/data/birthdayContent.js`
+The `decorations`, `icons` and `textures` folders are available for additional assets. The current scrapbook artwork is primarily CSS-based, so those folders don't need to contain anything for the site to work.
 
-You can edit:
+`node_modules/` and `dist/` are generated locally. There's no need to edit them.
 
-- Recipient's name
-- Birthday heading
-- Cover message
-- Introduction
-- Opening photograph and caption
-- Three memory sections
-- Five film strip photographs
-- Birthday letter
-- Sign-off and signature
+## Building for production
 
-### Adding Photos
-
-Place your photographs inside:
-
-`public/assets/photos/`
-
-Then add their filenames to `birthdayContent.js`.
-
-For example:
-
-```js
-openingPhoto: "cover.jpg",
-
-memories: [
-  {
-    image: "memory-01.jpg",
-    label: "01 · A day to keep",
-    caption: "Your caption",
-    note: "Your memory"
-  }
-],
-
-filmPhotos: [
-  "film-01.jpg",
-  "film-02.jpg",
-  "film-03.jpg",
-  "film-04.jpg",
-  "film-05.jpg"
-],
-```
-
-Leave an image path empty if you want to keep the default photo placeholder.
-
-## Run Locally
-
-Make sure Node.js is installed.
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Open the local URL displayed in your terminal.
-
-## Build for Production
+When the site is ready, create a production build:
 
 ```bash
 npm run build
 ```
 
-The production files will be generated inside the `dist` folder.
+Vite will generate the production files inside:
+
+```text
+dist/
+```
+
+To run a local preview of that build:
+
+```bash
+npm run preview
+```
+
+On Windows PowerShell, use:
+
+```powershell
+npm.cmd run build
+npm.cmd run preview
+```
 
 ## Deployment
 
-You can deploy this project using Vercel.
+The project is a standard Vite application, so it can be deployed using Vercel, Netlify or another static hosting provider.
 
-Connect your GitHub repository, select Vite as the framework, and deploy.
+For Vercel or Netlify:
+
+1. Push the project to a Git repository.
+2. Import the repository into your hosting provider.
+3. Select the Vite framework preset.
+4. Set the build command to `npm run build`.
+5. Set the output directory to `dist`.
+6. Deploy the project.
+
+Before sharing the link, check that the photographs and MP3 file are included in the repository and that their paths are correct.
+
+It's also worth opening the deployed site on a phone and checking the envelope animation, page layout, music controls, photo lightbox and interactive notes.
 
 ---
 
-*A little website for a person worth celebrating.*
-
-Made with care. ♡
+Made with a little time, a lot of memories, and the intention of making someone's birthday a bit more special.
