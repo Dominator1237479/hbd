@@ -255,6 +255,25 @@ Before sharing the link, check that the photographs and MP3 file are included in
 
 It's also worth opening the deployed site on a phone and checking the envelope animation, page layout, music controls, photo lightbox and interactive notes.
 
+## GitHub Pages Deployment
+
+The project deploys to GitHub Pages through GitHub Actions whenever you push to the `main` branch.
+
+1. Commit and push your changes from the project folder:
+
+   ```bash
+   git add .
+   git commit -m "Update birthday website"
+   git push origin main
+   ```
+
+2. In the GitHub repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+3. Check the **Actions** tab in the repository to see the build and deployment status.
+4. After a successful deployment, the website will be available at <https://dominator1237479.github.io/Birtday-01-host/>.
+5. Future pushes to `main` automatically build and publish the latest website.
+
+GitHub Pages on a free account requires a public repository. The published website is visible to anyone with the link.
+
 ---
 
 Made with a little time, a lot of memories, and the intention of making someone's birthday a bit more special.

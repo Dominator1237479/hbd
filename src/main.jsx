@@ -7,7 +7,7 @@ const symbol = (code) => String.fromCodePoint(code);
 
 function Photo({ src, alt, className = '', number = '01', onPhotoClick }) {
   const [failed, setFailed] = useState(false);
-  const imagePath = src ? (src.startsWith('/') ? src : `/assets/photos/${src}`) : '';
+  const imagePath = src ? (src.startsWith('/') ? `${import.meta.env.BASE_URL}${src.slice(1)}` : `${import.meta.env.BASE_URL}assets/photos/${src}`) : '';
   const canOpen = Boolean(imagePath && !failed && onPhotoClick);
   return <div className={`photo ${className}${canOpen ? ' photo-clickable' : ''}`} role={canOpen ? 'button' : undefined} tabIndex={canOpen ? 0 : undefined} aria-label={canOpen ? `Open photograph: ${alt}` : undefined}
     onClick={canOpen ? () => onPhotoClick(imagePath, alt) : undefined}
@@ -163,7 +163,7 @@ function App() {
 
   return <main>
     <BirthdayEffects opened={wished} />
-    <audio ref={audioRef} src="/assets/music/music.mp3" preload="none" loop onPlay={() => { setPlaying(true); setAudioUnavailable(false); }} onPause={() => setPlaying(false)} onError={() => { setPlaying(false); setAudioUnavailable(true); }} />
+    <audio ref={audioRef} src={`${import.meta.env.BASE_URL}assets/music/music.mp3`} preload="none" loop onPlay={() => { setPlaying(true); setAudioUnavailable(false); }} onPause={() => setPlaying(false)} onError={() => { setPlaying(false); setAudioUnavailable(true); }} />
     <Opening onOpen={reveal} opened={opened}/>
     <MusicControl playing={playing} unavailable={audioUnavailable} onToggle={toggleMusic}/>
     <div className={`experience ${opened ? 'experience-opened' : ''}`}><div className="book-intro"><span className="eyebrow">A BOOK OF LITTLE THINGS</span>
